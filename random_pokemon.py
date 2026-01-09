@@ -22,7 +22,7 @@ def get_random_pokemon():
 valid_choice = False
 
 while not valid_choice:
-    print('Enter your pokemon or type "random" for a random one:')
+    print('Player 1 - Enter your pokemon or type "random" for a random one:')
     choice = input().lower()
 
     if choice =="random":
@@ -40,7 +40,31 @@ while not valid_choice:
     else:
         print("Please choose a valid pokemon.\n")
     
+valid_choice2 = False
+player2 = 1
 
+while not valid_choice2:
+    print('Player 2 - Enter your pokemon or type "random" for a random one or leave blank to battle CPU:')
+    choice2 = input().lower()
+
+    if choice2 =="random":
+        pokemon_data2 = get_random_pokemon()
+        valid_choice2 = True
+    elif choice2 in pokemon_names: 
+        url = f'https://pokeapi.co/api/v2/pokemon/{choice2}'
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            pokemon_data2 = json.loads(response.text)
+            valid_choice2 = True
+        else:
+            print("API Error - try again.\n")
+    else:
+        pokemon_data2 = get_random_pokemon()
+        valid_choice2 = True
+        player2 = 0
+        print("No Player 2 present. CPU Pokemon chosen at Random.\n")
+    
 
 # Get the pokemon's data from the API
 url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(choice)
