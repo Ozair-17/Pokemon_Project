@@ -41,7 +41,7 @@ while not valid_choice:
         print("Please choose a valid pokemon.\n")
     
 valid_choice2 = False
-player2 = 1
+player2 = True
 
 while not valid_choice2:
     print('Player 2 - Enter your pokemon or type "random" for a random one or leave blank to battle CPU:')
@@ -59,11 +59,13 @@ while not valid_choice2:
             valid_choice2 = True
         else:
             print("API Error - try again.\n")
-    else:
+    elif choice == None:
         pokemon_data2 = get_random_pokemon()
         valid_choice2 = True
-        player2 = 0
-        print("No Player 2 present. CPU Pokemon chosen at Random.\n")
+        player2 = False
+        print("No Player 2, CPU Pokemon chosen at random")
+    else:
+        print("Please choose a valid pokemon.\n")
     
 
 # Get the pokemon's data from the API
